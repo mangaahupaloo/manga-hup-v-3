@@ -4,8 +4,8 @@ local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
 local function collectChests()
     for _, box in pairs(game.Workspace:GetDescendants()) do
-        if box:IsA("Part") and box.Name == "Chest" then
-            humanoidRootPart.CFrame = box.CFrame + Vector3.new(0, 3, 0)
+        if box:IsA("Part") and (box.Name == "Fruit" or box.Name == "Chest") then
+            humanoidRootPart.CFrame = CFrame.new(box.Position + Vector3.new(0, 3, 0))
             wait(0.2)
         end
     end
