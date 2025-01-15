@@ -4,68 +4,80 @@ local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
 local function collectChests()
     for _, box in pairs(game.Workspace:GetDescendants()) do
-        if box:IsA("Part") and (box.Name == "Fruit" or box.Name == "Chest") then
+        if box.Name == "Chest" then
             humanoidRootPart.CFrame = CFrame.new(box.Position + Vector3.new(0, 3, 0))
-            wait(0.2)
+            wait(0.5)
         end
     end
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
+local MainFrame = Instance.new("Frame")
 local TitleLabel = Instance.new("TextLabel")
-local StartButton = Instance.new("TextButton")
-local StopButton = Instance.new("TextButton")
+local FarmLabel = Instance.new("TextLabel")
+local AutoFarmChests = Instance.new("TextButton")
+local StopAutoFarm = Instance.new("TextButton")
 
 ScreenGui.Name = "MangaHubV3"
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-Frame.Name = "MainFrame"
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
-Frame.Size = UDim2.new(0, 300, 0, 200)
-Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+MainFrame.Size = UDim2.new(0, 300, 0, 200)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 
 TitleLabel.Name = "TitleLabel"
-TitleLabel.Parent = Frame
-TitleLabel.Text = "Manga Hub V3"
+TitleLabel.Parent = MainFrame
+TitleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TitleLabel.Size = UDim2.new(1, 0, 0, 50)
 TitleLabel.Font = Enum.Font.SourceSansBold
-TitleLabel.TextSize = 20
+TitleLabel.Text = "Manga Hub V3"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TitleLabel.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-TitleLabel.Size = UDim2.new(1, 0, 0, 40)
+TitleLabel.TextSize = 18
 
-StartButton.Name = "StartButton"
-StartButton.Parent = Frame
-StartButton.Text = "Start Collecting"
-StartButton.Font = Enum.Font.SourceSans
-StartButton.TextSize = 18
-StartButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-StartButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-StartButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-StartButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+FarmLabel.Name = "FarmLabel"
+FarmLabel.Parent = MainFrame
+FarmLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+FarmLabel.Size = UDim2.new(1, 0, 0, 30)
+FarmLabel.Position = UDim2.new(0, 0, 0, 50)
+FarmLabel.Font = Enum.Font.SourceSansBold
+FarmLabel.Text = "Farm"
+FarmLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+FarmLabel.TextSize = 16
 
-StopButton.Name = "StopButton"
-StopButton.Parent = Frame
-StopButton.Text = "Stop"
-StopButton.Font = Enum.Font.SourceSans
-StopButton.TextSize = 18
-StopButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-StopButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-StopButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-StopButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+AutoFarmChests.Name = "AutoFarmChests"
+AutoFarmChests.Parent = MainFrame
+AutoFarmChests.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+AutoFarmChests.Size = UDim2.new(0.9, 0, 0, 30)
+AutoFarmChests.Position = UDim2.new(0.05, 0, 0, 90)
+AutoFarmChests.Font = Enum.Font.SourceSans
+AutoFarmChests.Text = "Auto Collect Chests"
+AutoFarmChests.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoFarmChests.TextSize = 14
+
+StopAutoFarm.Name = "StopAutoFarm"
+StopAutoFarm.Parent = MainFrame
+StopAutoFarm.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+StopAutoFarm.Size = UDim2.new(0.9, 0, 0, 30)
+StopAutoFarm.Position = UDim2.new(0.05, 0, 0, 130)
+StopAutoFarm.Font = Enum.Font.SourceSans
+StopAutoFarm.Text = "Stop Collecting"
+StopAutoFarm.TextColor3 = Color3.fromRGB(255, 255, 255)
+StopAutoFarm.TextSize = 14
 
 local collecting = false
 
-StartButton.MouseButton1Click:Connect(function()
+AutoFarmChests.MouseButton1Click:Connect(function()
     collecting = true
     while collecting do
         collectChests()
-        wait(0.1)
+        wait(1)
     end
 end)
 
-StopButton.MouseButton1Click:Connect(function()
+StopAutoFarm.MouseButton1Click:Connect(function()
     collecting = false
 end)
